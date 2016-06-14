@@ -1,14 +1,11 @@
-module Main exposing (..)
+module MovieDomino exposing (..)
 
 import Html exposing (..)
 import Html.App as Html
-import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import Http
-import Json.Decode as Json
-import Task
+import Html.Events exposing (onClick)
 
 
+main : Program Never
 main =
     Html.program
         { init = init
@@ -46,23 +43,37 @@ init =
 
 
 type Msg
-    = NoOperation
+    = SearchClicked
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        NoOperation ->
-            ( model, Cmd.none )
+        SearchClicked ->
+            let
+                newModel = { model | actors = Just [ Actor "Uma Thurman" 123 ] }
+            in
+                ( newModel, Cmd.none )
 
 
 view : Model -> Html Msg
 view model =
     div []
-        [ input [] [ text model.actorSearchFieldText ]
-        , button [ ] [ text "Search" ]
+        [ header
+        , searchField model
         , actorsListView model.actors
         ]
+
+searchField : { a | actorSearchFieldText : String } -> Html Msg
+searchField model =
+    div [ ]
+        [ input [] [ text model.actorSearchFieldText ]
+        , button [ onClick SearchClicked ] [ text "Search" ]
+        ]
+
+header : Html a
+header =
+    h1 [] [ text "Movie Domino" ]
 
 actorsListView : Maybe (List Actor) -> Html Msg
 actorsListView maybeActors =
