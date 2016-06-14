@@ -21,3 +21,5 @@ type alias Model =
 
 type Msg
     = SearchClicked
+    | SearchSucceeded
+    | SearchFailed

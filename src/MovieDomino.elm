@@ -1,8 +1,6 @@
 module MovieDomino exposing (..)
 
-import Html exposing (..)
 import Html.App as Html
-import Html.Events exposing (onClick)
 import Models exposing (..)
 import Views exposing (view)
 
@@ -23,14 +21,22 @@ init =
     , Cmd.none
     )
 
+
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         SearchClicked ->
             let
-                newModel = { model | actors = Just [ Actor "Uma Thurman" 123 ] }
+                newModel =
+                    { model | actors = Just [ Actor "Uma Thurman" 123 ] }
             in
                 ( newModel, Cmd.none )
+
+        SearchSucceeded ->
+            ( model, Cmd.none )
+
+        SearchFailed ->
+            ( model, Cmd.none )
 
 
 subscriptions : Model -> Sub Msg
