@@ -23,3 +23,4 @@ type Msg
     = SearchClicked
     | SearchSucceeded
     | SearchFailed
+    | TextChanged String

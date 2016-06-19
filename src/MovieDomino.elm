@@ -38,6 +38,13 @@ update msg model =
         SearchFailed ->
             ( model, Cmd.none )
 
+        TextChanged newText ->
+            let
+                newModel =
+                    { model | actorSearchFieldText = newText }
+            in
+                ( newModel, Cmd.none )
+
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
