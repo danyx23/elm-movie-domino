@@ -1,5 +1,7 @@
 module Models exposing (..)
 
+import Http
+
 type alias Movie =
     { name : String
     , id : Int
@@ -21,6 +23,6 @@ type alias Model =
 
 type Msg
     = SearchClicked
-    | SearchSucceeded
-    | SearchFailed
+    | SearchSucceeded (List Actor)
+    | SearchFailed Http.Error
     | TextChanged String
