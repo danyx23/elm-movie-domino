@@ -4,6 +4,7 @@ import Html.App as Html
 import Models exposing (..)
 import Views exposing (view)
 import Http
+import ServerQueries exposing (searchPerson)
 
 
 main : Program Never
@@ -27,11 +28,7 @@ update : DominoAppMessage -> Model -> ( Model, Cmd DominoAppMessage )
 update msg model =
     case msg of
         SearchClicked ->
-            let
-                newModel =
-                    { model | actors = Just [ Actor "Uma Thurman" 123 ] }
-            in
-                ( newModel, Cmd.none )
+            ( model, searchPerson model.actorSearchFieldText )
 
         SearchSucceeded actorsList ->
             let
