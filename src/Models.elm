@@ -19,6 +19,7 @@ type alias Model =
     , searchButtonEnabled : Bool
     , actors : Maybe (List Actor)
     , selectedActor : Maybe Int
+    , errorMessage : Maybe String
     }
 
 type DominoAppMessage

@@ -3,6 +3,7 @@ module MovieDomino exposing (..)
 import Html.App as Html
 import Models exposing (..)
 import Views exposing (view)
+import Http
 
 
 main : Program Never
@@ -17,7 +18,7 @@ main =
 
 init : ( Model, Cmd DominoAppMessage )
 init =
-    ( Model "" False Nothing Nothing
+    ( Model "" False Nothing Nothing Nothing
     , Cmd.none
     )
 
@@ -36,7 +37,25 @@ update msg model =
             ( model, Cmd.none )
 
         SearchFailed error ->
-            ( model, Cmd.none )
+            let
+                errorMessage =
+                    case error of
+                        Http.Timeout ->
+                            "Connection timed out"
+
+                        Http.NetworkError ->
+                            "Network error"
+
+                        Http.UnexpectedPayload message ->
+                            message
+
+                        Http.BadResponse errorcode message ->
+                            message
+
+                newModel =
+                    { model | errorMessage = Just errorMessage }
+            in
+                ( newModel, Cmd.none )
 
         TextChanged newText ->
             let
