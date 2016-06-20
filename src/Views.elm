@@ -3,10 +3,10 @@ module Views exposing (view)
 import Html exposing (..)
 import Html.Events exposing (onClick, onInput)
 import Html.Attributes exposing (placeholder)
-import Models exposing (Model, Msg(..), Actor)
+import Models exposing (Model, DominoAppMessage(..), Actor)
 
 
-view : Model -> Html Msg
+view : Model -> Html DominoAppMessage
 view model =
     div []
         [ header
@@ -15,7 +15,7 @@ view model =
         ]
 
 
-searchField : Model -> Html Msg
+searchField : Model -> Html DominoAppMessage
 searchField model =
     div []
         [ input [ placeholder "e.g. Uma Thurman", onInput TextChanged ] [ text model.actorSearchFieldText ]
@@ -28,7 +28,7 @@ header =
     h1 [] [ text "Movie Domino" ]
 
 
-actorsListView : Maybe (List Actor) -> Html Msg
+actorsListView : Maybe (List Actor) -> Html DominoAppMessage
 actorsListView maybeActors =
     case maybeActors of
         Nothing ->
@@ -38,6 +38,6 @@ actorsListView maybeActors =
             div [] (List.map actorView actors)
 
 
-actorView : Actor -> Html Msg
+actorView : Actor -> Html DominoAppMessage
 actorView actor =
     text actor.name

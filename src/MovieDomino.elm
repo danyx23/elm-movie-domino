@@ -15,14 +15,14 @@ main =
         }
 
 
-init : ( Model, Cmd Msg )
+init : ( Model, Cmd DominoAppMessage )
 init =
     ( Model "" False Nothing Nothing
     , Cmd.none
     )
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : DominoAppMessage -> Model -> ( Model, Cmd DominoAppMessage )
 update msg model =
     case msg of
         SearchClicked ->
@@ -32,10 +32,10 @@ update msg model =
             in
                 ( newModel, Cmd.none )
 
-        SearchSucceeded ->
+        SearchSucceeded actorsList ->
             ( model, Cmd.none )
 
-        SearchFailed ->
+        SearchFailed error ->
             ( model, Cmd.none )
 
         TextChanged newText ->
@@ -46,6 +46,6 @@ update msg model =
                 ( newModel, Cmd.none )
 
 
-subscriptions : Model -> Sub Msg
+subscriptions : Model -> Sub DominoAppMessage
 subscriptions model =
     Sub.none

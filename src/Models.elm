@@ -21,7 +21,7 @@ type alias Model =
     , selectedActor : Maybe Int
     }
 
-type Msg
+type DominoAppMessage
     = SearchClicked
     | SearchSucceeded (List Actor)
     | SearchFailed Http.Error
