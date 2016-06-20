@@ -2,17 +2,26 @@ module Views exposing (view)
 
 import Html exposing (..)
 import Html.Events exposing (onClick, onInput)
-import Html.Attributes exposing (placeholder)
+import Html.Attributes exposing (placeholder, class)
 import Models exposing (Model, DominoAppMessage(..), Actor)
 
 
 view : Model -> Html DominoAppMessage
 view model =
-    div []
-        [ header
-        , searchField model
-        , actorsListView model.actors
-        ]
+    div [] <|
+        [ header ] ++
+        ( renderErrorMessage model.errorMessage) ++
+        [ ( searchField model ) ] ++
+        [ actorsListView model.actors ]
+
+
+renderErrorMessage : Maybe String -> List (Html DominoAppMessage)
+renderErrorMessage maybeErrors =
+    case maybeErrors of
+        Nothing ->
+            []
+        Just errors ->
+            [ div [ class "bg-danger" ] [ text errors ] ]
 
 
 searchField : Model -> Html DominoAppMessage
