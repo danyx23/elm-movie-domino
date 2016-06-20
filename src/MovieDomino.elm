@@ -34,7 +34,11 @@ update msg model =
                 ( newModel, Cmd.none )
 
         SearchSucceeded actorsList ->
-            ( model, Cmd.none )
+            let
+                newModel =
+                    { model | actors = Just actorsList }
+            in
+                ( newModel, Cmd.none )
 
         SearchFailed error ->
             let
