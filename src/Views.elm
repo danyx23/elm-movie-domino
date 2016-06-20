@@ -8,11 +8,11 @@ import Models exposing (Model, DominoAppMessage(..), Actor)
 
 view : Model -> Html DominoAppMessage
 view model =
-    div [] <|
-        [ header ] ++
-        ( renderErrorMessage model.errorMessage) ++
-        [ ( searchField model ) ] ++
-        [ actorsListView model.actors ]
+    div []
+        <| [ header ]
+        ++ (renderErrorMessage model.errorMessage)
+        ++ [ (searchField model) ]
+        ++ [ actorsListView model.actors ]
 
 
 renderErrorMessage : Maybe String -> List (Html DominoAppMessage)
@@ -20,15 +20,29 @@ renderErrorMessage maybeErrors =
     case maybeErrors of
         Nothing ->
             []
+
         Just errors ->
             [ div [ class "bg-danger" ] [ text errors ] ]
 
 
 searchField : Model -> Html DominoAppMessage
 searchField model =
-    div []
-        [ input [ placeholder "e.g. Uma Thurman", onInput TextChanged ] [ text model.actorSearchFieldText ]
-        , button [ onClick SearchClicked ] [ text "Search" ]
+    div [ class "input-group" ]
+        [ input
+            [ placeholder "e.g. Uma Thurman"
+            , onInput TextChanged
+            , class "form-control"
+            ]
+            [ text model.actorSearchFieldText ]
+        , span
+            [ class "input-group-btn"
+            ]
+            [ button
+                [ onClick SearchClicked
+                , class "btn btn-default"
+                ]
+                [ text "Search" ]
+            ]
         ]
 
 
@@ -44,9 +58,9 @@ actorsListView maybeActors =
             text "Pending"
 
         Just actors ->
-            div [] (List.map actorView actors)
+            div [ class "list-group" ] (List.map actorView actors)
 
 
 actorView : Actor -> Html DominoAppMessage
 actorView actor =
-    text actor.name
+    button [ class "list-group-item" ] [ text actor.name ]
