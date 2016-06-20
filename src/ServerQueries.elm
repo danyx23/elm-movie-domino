@@ -1,9 +1,10 @@
 module ServerQueries exposing (searchPerson)
 
 import Http
-import Models exposing (..)
 import Task
 import Json.Decode exposing (..)
+
+import Models exposing (..)
 
 apiKey : String
 apiKey =

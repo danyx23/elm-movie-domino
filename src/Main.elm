@@ -1,9 +1,9 @@
 module MovieDomino exposing (..)
 
+import Http
 import Html.App as Html
 import Models exposing (..)
 import Views exposing (view)
-import Http
 import ServerQueries exposing (searchPerson)
 
 
@@ -19,7 +19,7 @@ main =
 
 init : ( Model, Cmd DominoAppMessage )
 init =
-    ( Model "" False Nothing Nothing Nothing
+    ( Model "" Nothing Nothing
     , Cmd.none
     )
 
@@ -33,7 +33,10 @@ update msg model =
         SearchSucceeded actorsList ->
             let
                 newModel =
-                    { model | actors = Just actorsList }
+                    { model
+                        | actors = Just actorsList
+                        , errorMessage = Nothing
+                    }
             in
                 ( newModel, Cmd.none )
 
