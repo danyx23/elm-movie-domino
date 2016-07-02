@@ -14,19 +14,13 @@ So far, only a simple actor search is implemented. You can enter a name, click
 a button, and get a list of actors, sorted by popularity (using themoviedb.org
 API as a backend).
 
-Compiling the program
----------------------
+Running the program
+-------------------
 
-To compile, make sure you can run the elm compiler, then:
-```
-git clone
-cd ...
-elm package install
-elm make src/Main.elm --output elm-movie-domino.js
-```
+To run the program clone this repository and execute `elm reactor` which
+will get you compile-on-reload.
 
-Then open elm-movie-domino.html in a browser. You can also use `elm reactor` which
-will get you compile-on-reload but no styles.
+Then open [http://localhost:8000/src/Main.elm](http://localhost:8000/src/Main.elm).
 
 Challenges
 ----------
