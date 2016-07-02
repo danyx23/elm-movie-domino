@@ -3,14 +3,13 @@ module Views exposing (view)
 import Html exposing (..)
 import Html.Events exposing (onClick, onInput)
 import Html.Attributes exposing (placeholder, class, rel, href)
-
 import Models exposing (Model, DominoAppMessage(..), Actor)
 
 
 view : Model -> Html DominoAppMessage
 view model =
     div [ class "container" ]
-        (   [ renderLink, renderHeader ]
+        ([ renderLink, renderHeader ]
             ++ (renderErrorMessage model.errorMessage)
             ++ [ renderSearchField model ]
             ++ [ renderActorsListView model.actors ]
@@ -51,10 +50,10 @@ renderSearchField model =
 renderLink : Html DominoAppMessage
 renderLink =
     node "link"
-      [ href "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-      , rel "stylesheet"
-      ]
-      []
+        [ href "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+        , rel "stylesheet"
+        ]
+        []
 
 
 renderHeader : Html DominoAppMessage
